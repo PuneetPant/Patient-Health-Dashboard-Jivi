@@ -1,13 +1,698 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* ============================= */
+/* THEME VARIABLES */
+/* ============================= */
+:root {
+  --bg: #f4f6f9;
+  --text: #333;
+  --card-bg: #ffffff;
+  --sidebar-bg: #2d3748;
+  --sidebar-text: #ffffff;
+  --sidebar-hover: #4a5568;
+  --sidebar-selected: #1a202c;
+  --alert-bg: #e53e3e;
+
+  /* Status colors (light mode) */
+  --taken: #047857;       /* green-700 */
+  --missed: #dc2626;      /* red-600 */
+  --scheduled: #2563eb;   /* blue-600 */
+  --completed: #6b7280;   /* gray-500 */
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.dashboard.dark {
+  --bg: #1a202c;
+  --text: #f5f5f5;
+  --card-bg: #2d3748;
+  --sidebar-bg: #111827;
+  --sidebar-text: #e5e7eb;
+  --sidebar-hover: #374151;
+  --sidebar-selected: #4b5563;
+  --alert-bg: #b91c1c;
+
+  /* Status colors (dark mode, brighter) */
+  --taken: #34d399;       /* green-400 */
+  --missed: #f87171;      /* red-400 */
+  --scheduled: #60a5fa;   /* blue-400 */
+  --completed: #9ca3af;   /* gray-400 */
 }
+
+/* ============================= */
+/* GLOBAL */
+/* ============================= */
+/* ============================= */
+/* THEME VARIABLES */
+/* ============================= */
+body.light {
+  --bg: #f4f6f9;
+  --text: #333;
+  --card-bg: #ffffff;
+  --sidebar-bg: #2d3748;
+  --sidebar-text: #ffffff;
+  --sidebar-hover: #4a5568;
+  --sidebar-selected: #1a202c;
+  --alert-bg: #e53e3e;
+
+  --taken: #047857;
+  --missed: #dc2626;
+  --scheduled: #2563eb;
+  --completed: #6b7280;
+}
+
+body.dark {
+  --bg: #0f172a; /* ✅ darker background for whole page */
+  --text: #f5f5f5;
+  --card-bg: #1e293b;
+  --sidebar-bg: #111827;
+  --sidebar-text: #e5e7eb;
+  --sidebar-hover: #374151;
+  --sidebar-selected: #4b5563;
+  --alert-bg: #b91c1c;
+
+  --taken: #34d399;
+  --missed: #f87171;
+  --scheduled: #60a5fa;
+  --completed: #9ca3af;
+}
+
+/* ============================= */
+/* GLOBAL */
+/* ============================= */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
+}
+
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+  transition: background 0.3s, color 0.3s;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+/* ============================= */
+/* SIDEBAR (Patient List) */
+/* ============================= */
+.patient-list {
+  width: 220px;
+  background: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  padding: 20px;
+  transition: background 0.3s, color 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.patient-list h3 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+}
+
+.search-input {
+  width: 90%;
+  padding: 8px 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  background: var(--card-bg);
+  color: var(--text);
+}
+
+.search-input:focus {
+  border-color: var(--scheduled);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+.patient-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+}
+
+.patient-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  margin: 5px 0;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.patient-list li:hover {
+  background: var(--sidebar-hover);
+}
+
+.patient-list li.selected {
+  background: var(--sidebar-selected);
+  font-weight: bold;
+}
+
+.list-photo {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* ============================= */
+/* RESPONSIVE SIDEBAR + SEARCH FIX */
+/* ============================= */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .search-input {
+    font-size: 13px;
+    padding: 6px 8px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .patient-list {
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px solid #444;
+  }
+
+  .search-input {
+    width: 90%;
+    margin: 0 0 12px 0; /* stays above list */
+    font-size: 14px;
+  }
+
+  .patient-list ul {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+  }
+
+  .patient-list li {
+    flex: 0 0 auto;
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+
+  .list-photo {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .search-input {
+    width:90%;
+    font-size: 13px;
+    padding: 6px 8px;
+  }
+}
+
+
+/* ============================= */
+/* PATIENT HEADER */
+/* ============================= */
+.patient-header {
+  display: flex;
+  align-items: center;
+  background: var(--card-bg);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  transition: background 0.3s, color 0.3s;
+  color: var(--text); /* ✅ force text color */
+}
+
+.patient-header h2,
+.patient-header p,
+.patient-header span {
+  color: var(--text); /* ✅ inherit theme text color */
+}
+
+.patient-header h2 {
+  margin: 0;
+}
+
+.patient-photo {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin-right: 15px;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.insights-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  background: var(--card-bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s, border 0.3s;
+  box-shadow: 0 1px 3px rgba(0,0,0,2);
+}
+
+.insights-btn:hover {
+  transform: scale(1.1);
+}
+
+.insights-btn:active {
+  transform: scale(0.97);
+}
+
+
+/* ============================= */
+/* CARDS */
+/* ============================= */
+.card {
+  background: var(--card-bg);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  transition: background 0.3s, color 0.3s;
+}
+.card h3{
+  color: var(--text); 
+}
+
+.card input {
+  display: block;
+  margin: 5px 0;
+  padding: 6px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.card button {
+  margin-top: 5px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  background: var(--sidebar-bg);
+  color: white;
+  cursor: pointer;
+}
+
+.card button:hover {
+  opacity: 0.8;
+}
+
+/* Medication List Styling */
+.card ul {
+  padding-left: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.card li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 8px 0;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: var(--card-bg);
+  border: 1px solid #e5e7eb;
+}
+
+.card li.taken {
+  color: var(--taken);
+  font-weight: 500;
+}
+
+.card li.missed {
+  color: var(--missed);
+  font-weight: 500;
+}
+
+/* Buttons inside Medication List */
+.card li button {
+  margin-left: 12px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  background: var(--sidebar-bg);
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.card li button:hover {
+  background: var(--sidebar-hover);
+}
+
+/* Add New Prescription Form */
+.card h4 {
+  margin-top: 15px;
+  margin-bottom: 8px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.card input {
+  display: block;
+  margin: 6px 0;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 90%;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.card input:focus {
+  outline: none;
+  border-color: var(--scheduled);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2); /* blue highlight */
+}
+
+/* Add Medication Button */
+.card button {
+  margin-top: 8px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  background: var(--scheduled);
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.card button:hover {
+  background: #1d4ed8; /* darker blue */
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* ============================= */
+/* ALERTS */
+/* ============================= */
+.alert-banner {
+  background: var(--alert-bg);
+  color: white;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  transition: background 0.3s;
+}
+
+/* ============================= */
+/* STATUS COLORS (use variables) */
+/* ============================= */
+.taken { color: var(--taken); }
+.missed { color: var(--missed); }
+.scheduled { color: var(--scheduled); }
+.completed { color: var(--completed); }
+
+/* ============================= */
+/* THEME TOGGLE BUTTON */
+/* ============================= */
+.theme-toggle {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 15px;
+  gap:10px;
+}
+
+.theme-toggle button {
+  padding: 8px 12px;
+  border: none;
+  background: var(--card-bg);
+  color: var(--text);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.theme-toggle button:hover {
+  opacity: 0.8;
+}
+
+
+.search-input {
+  width: 90%;
+  padding: 8px 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.search-input:focus {
+  border-color: var(--scheduled);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+
+/* Modal overlay (dark background) */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Modal box */
+.modal-content {
+  background: var(--card-bg);
+  color: var(--text);
+  padding: 20px;
+  border-radius: 10px;
+  width: 500px;
+  max-width: 90%;
+  max-height: 80%;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.close-btn:hover {
+  opacity: 0.7;
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.summary-content {
+  background: var(--card-bg);
+  color: var(--text);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.summary-content h2 {
+  margin-top: 0;
+}
+
+/* ============================= */
+/* RESPONSIVE DESIGN ENHANCEMENTS */
+/* ============================= */
+
+/* Large screens (desktops >1280px) */
+@media (min-width: 1280px) {
+  .main-content {
+    padding: 24px 32px;
+  }
+
+  .card {
+    padding: 20px;
+  }
+}
+
+/* Tablets (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr; /* stack cards */
+    gap: 16px;
+  }
+
+  .patient-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .patient-photo {
+    margin-bottom: 10px;
+  }
+
+  .card {
+    width: 90%; 
+  }
+}
+
+/* Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .dashboard {
+    overflow: hidden;
+    flex-direction: column;
+  }
+
+  .patient-list {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    padding: 10px;
+    background: var(--sidebar-bg);
+    border-bottom: 1px solid #444;
+  }
+
+  .patient-list ul {
+    display: flex;
+    gap: 10px;
+  }
+
+  .patient-list li {
+    flex: 0 0 auto;
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+
+  .list-photo {
+    width: 28px;
+    height: 28px;
+  }
+
+  .main-content {
+    display: grid;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .patient-header h2 {
+    font-size: 18px;
+  }
+
+  .patient-header p {
+    font-size: 13px;
+  }
+
+  .card {
+    width: 95%; 
+    max-width: 500px;
+    padding: 12px;
+  }
+
+  .card h3 {
+    font-size: 16px;
+  }
+
+  .card input {
+    font-size: 13px;
+    padding: 6px 8px;
+  }
+
+  .card button {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+}
+
+/* Small phones (max-width: 480px) */
+@media (max-width: 480px) {
+  .theme-toggle {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .theme-toggle button,
+  .insights-btn {
+    font-size: 13px;
+    padding: 6px 8px;
+  }
+
+  .patient-header h2 {
+    font-size: 16px;
+  }
+
+  .patient-header p {
+    font-size: 12px;
+  }
+
+  .card h3 {
+    font-size: 15px;
+  }
+
+  .search-input {
+    width: 90%;
+    font-size: 13px;
+    padding: 6px 8px;
+  }
+
+  .footer {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  /* Make modal take full screen on very small devices */
+  .modal-content {
+    width: 95%;
+    height: 90%;
+    border-radius: 8px;
+    padding: 16px;
+  }
+
+  .close-btn {
+    font-size: 16px;
+  }
+}
+
+
+
