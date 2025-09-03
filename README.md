@@ -53,6 +53,3 @@ A **React-based patient management dashboard** with light/dark theme support, AI
 
 - Dark mode and light mode toggle
 - Consistent styling with CSS variables
-
----
-# Patient-Health-Dashboard-Jivi
