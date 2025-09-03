@@ -125,6 +125,101 @@
       "appointments": [
         { "date": "2025-09-08", "time": "4:00 PM", "doctor": "Dr. Evans", "status": "scheduled" }
       ]
+    },
+    {
+      "id": 6,
+      "name": "Olivia Davis",
+      "age": 34,
+      "bloodType": "A-",
+      "allergies": ["Latex"],
+      "status": "Stable",
+      "photo": "https://randomuser.me/api/portraits/women/15.jpg",
+      "vitals": [
+        { "date": "2025-08-30", "heartRate": 78, "bloodPressure": "118/76", "temperature": 98.6, "weight": 62.5 },
+        { "date": "2025-09-02", "heartRate": 76, "bloodPressure": "117/75", "temperature": 98.5, "weight": 62.3 }
+      ],
+      "medications": [
+        { "name": "Iron Supplement", "dosage": "325mg", "frequency": "Daily", "status": "taken" }
+      ],
+      "appointments": [
+        { "date": "2025-09-15", "time": "11:00 AM", "doctor": "Dr. White", "status": "scheduled" }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "William Taylor",
+      "age": 58,
+      "bloodType": "B+",
+      "allergies": ["Shellfish"],
+      "status": "Critical",
+      "photo": "https://randomuser.me/api/portraits/men/22.jpg",
+      "vitals": [
+        { "date": "2025-08-28", "heartRate": 105, "bloodPressure": "150/95", "temperature": 101.2, "weight": 82.1 },
+        { "date": "2025-09-02", "heartRate": 108, "bloodPressure": "152/96", "temperature": 101.5, "weight": 82.0 }
+      ],
+      "medications": [
+        { "name": "Aspirin", "dosage": "81mg", "frequency": "Daily", "status": "missed" }
+      ],
+      "appointments": [
+        { "date": "2025-09-07", "time": "2:00 PM", "doctor": "Dr. Carter", "status": "scheduled" }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Isabella Wilson",
+      "age": 41,
+      "bloodType": "O+",
+      "allergies": ["None"],
+      "status": "Under Observation",
+      "photo": "https://randomuser.me/api/portraits/women/25.jpg",
+      "vitals": [
+        { "date": "2025-08-29", "heartRate": 90, "bloodPressure": "130/85", "temperature": 99.0, "weight": 70.0 },
+        { "date": "2025-09-02", "heartRate": 89, "bloodPressure": "129/84", "temperature": 98.9, "weight": 69.8 }
+      ],
+      "medications": [
+        { "name": "Levothyroxine", "dosage": "100mcg", "frequency": "Daily", "status": "taken" }
+      ],
+      "appointments": [
+        { "date": "2025-09-14", "time": "10:00 AM", "doctor": "Dr. Johnson", "status": "scheduled" }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "James Anderson",
+      "age": 50,
+      "bloodType": "AB-",
+      "allergies": ["Peanuts"],
+      "status": "Recovering",
+      "photo": "https://randomuser.me/api/portraits/men/28.jpg",
+      "vitals": [
+        { "date": "2025-08-31", "heartRate": 82, "bloodPressure": "125/80", "temperature": 98.7, "weight": 78.5 },
+        { "date": "2025-09-02", "heartRate": 84, "bloodPressure": "127/82", "temperature": 98.9, "weight": 78.4 }
+      ],
+      "medications": [
+        { "name": "Warfarin", "dosage": "5mg", "frequency": "Daily", "status": "taken" }
+      ],
+      "appointments": [
+        { "date": "2025-09-09", "time": "1:00 PM", "doctor": "Dr. Kim", "status": "scheduled" }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Charlotte Thomas",
+      "age": 26,
+      "bloodType": "A+",
+      "allergies": ["None"],
+      "status": "Stable",
+      "photo": "https://randomuser.me/api/portraits/women/35.jpg",
+      "vitals": [
+        { "date": "2025-08-30", "heartRate": 70, "bloodPressure": "110/70", "temperature": 98.2, "weight": 58.0 },
+        { "date": "2025-09-02", "heartRate": 72, "bloodPressure": "111/71", "temperature": 98.3, "weight": 58.1 }
+      ],
+      "medications": [
+        { "name": "Folic Acid", "dosage": "1mg", "frequency": "Daily", "status": "taken" }
+      ],
+      "appointments": [
+        { "date": "2025-09-16", "time": "3:30 PM", "doctor": "Dr. Green", "status": "scheduled" }
+      ]
     }
   ]
 }
