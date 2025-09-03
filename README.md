@@ -43,6 +43,7 @@ A **React-based patient management dashboard** with light/dark theme support, AI
 - Integrated with LLM (Gemini / OpenAI / Groq) via a custom hook (`useHealthInsights`)
 - Auto-generated health recommendations displayed in a modal
 - Includes a disclaimer: _Not a substitute for professional medical advice_
+- Note: Use AI feature with care(using free account)
 
 ### 📄 Patient Summary PDF
 

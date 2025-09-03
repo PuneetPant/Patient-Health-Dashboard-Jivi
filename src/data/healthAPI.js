@@ -1,7 +1,7 @@
 export const getHealthInsights = async (patient) => {
   try {
     const response = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-8b:generateContent?key=" +
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=" +
         process.env.REACT_APP_GEMINI_API_KEY,
       {
         method: "POST",
